@@ -1,0 +1,153 @@
+ANS:1--
+. Implement Queue using Stacks------
+class MyQueue {
+    private Deque<Integer> stk1 = new ArrayDeque<>();
+    private Deque<Integer> stk2 = new ArrayDeque<>();
+
+    public MyQueue() {
+
+    }
+    
+    public void push(int x) {
+        stk1.push(x);
+    }
+    
+    public int pop() {
+        move();
+        return stk2.pop();
+    }
+    
+    public int peek() {
+        move();
+        return stk2.peek();
+    }
+    
+    public boolean empty() {
+        return stk1.isEmpty() && stk2.isEmpty();
+    }
+
+    private void move() {
+        while (stk2.isEmpty()) {
+            while (!stk1.isEmpty()) {
+                stk2.push(stk1.pop());
+            }
+        }
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:2--
+Design Circular Queue
+class MyCircularQueue {
+
+            int front=-1;
+     int rear=-1;
+     int size=0;
+     int [] arr;
+    public MyCircularQueue(int k) {
+          arr=new int[k];
+    }
+    
+    public boolean enQueue(int value) {
+        if(size==arr.length)
+        {
+            return false;
+        }
+         else if(size==0)
+        {
+            front=rear=0;
+            arr[0]=value;
+            size++;
+            return true;
+        }
+         else if(rear<arr.length-1)
+        {
+            arr[++rear]=value;
+            size++;
+            return true;
+        }
+        else if(rear==arr.length-1)
+        {
+            rear=0;
+            arr[0]=value;
+            size++;
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean deQueue() {
+        if(size==0)
+        {
+            return false;
+        }
+        else
+        {
+            int val=arr[front];
+            if(front==arr.length-1) front=0;
+            else
+                front++;
+                size--;
+                return true;
+                 
+        }
+       
+    }
+    
+    public int Front() {
+        if(size==0)
+        {
+            return -1;
+        }
+        int val =arr[front];
+       // front++;
+        return val;
+    }
+    
+    public int Rear() {
+          if(size==0)
+        {
+            return -1;
+        }
+        int val=arr[rear];
+        return val;
+    }
+    
+    public boolean isEmpty() {
+        if(size==0)
+        {
+            return true;
+        }
+        else return false;
+    }
+    
+    public boolean isFull() {
+            if(size==arr.length)
+        {
+            return true;
+        }
+        else return false;
+    }
+    }
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ANS:3--
+Queue Reversa
+class GfG{
+  
+    public Queue<Integer> rev(Queue<Integer> q){
+     
+       Stack<Integer> stack = new Stack<>();
+
+     
+        while (!q.isEmpty()) {
+            stack.push(q.poll());
+        }
+
+      
+        while (!stack.isEmpty()) {
+            q.offer(stack.pop());
+        }
+        return q;
+    }
+}
